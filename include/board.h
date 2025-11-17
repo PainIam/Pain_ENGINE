@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <print>
+#include <cstdlib>
 
 
 // 0 - 12 
@@ -15,7 +15,7 @@ class Board {
     public:
         Board();
         void print();
-        void movePiece();
+        void movePiece(int fromX, int fromY, int toX, int toY);
 };
 
 

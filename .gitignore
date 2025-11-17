@@ -1,0 +1,9 @@
+.vscode 
+*.o
+*.obj
+
+*.exe
+*.app
+
+pain 
+roadmap.txt

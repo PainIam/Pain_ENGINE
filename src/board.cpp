@@ -14,11 +14,18 @@ Board::Board() {
 
         for(int i = 0; i < 8; i++) {
             for(int j = 0; j < 8; j++) {
-                board[i][j] = start[i][j]; // initialize the board 
+                board[i][j] = start[i][j]; // initialize the board
             }
         }
 };
-//10-8=3
+
+
+
+/*
+print function which works by mapping a string index t
+to the enum number on the board
+*/
+
 void Board::print() {
     
     std::string pieces = " PNBRQKpnbrqk";
@@ -31,11 +38,24 @@ void Board::print() {
             if(board[i][j] == EMPTY) {
                 std::cout << " __|";
             } else {
-                std::cout << ""<<pieces[board[i][j]] << "__|";
+                std::cout << ""<< pieces[board[i][j]] << "__|"; // map enum number to string pieces 
             }
         }
         count--;
         std::cout << std::endl;
     }
+    std::cout << "      a   b   c   d   e   f   g   h" << std::endl;
+}
+
+/*
+move fn, no legal move checks, 
+*/
+
+void Board::movePiece(int fromX, int fromY, int toX, int toY) {
+
+    int temp = board[fromX][fromY];
+    board[fromX][fromY] = EMPTY;
+    board[toX][toY] = temp;
+    print();
 
 }
