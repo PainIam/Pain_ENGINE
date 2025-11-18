@@ -10,12 +10,12 @@ enum {EMPTY, WPAWN, WKNIGHT, WBISHOP, WROOK, WQUEEN, WKING,BPAWN, BKNIGHT, BBISH
 class Board { 
 
     private:
-        int board[8][8];
+        int board[8][8]; 
     
     public:
         Board();
         void print();
-        void movePiece(int fromX, int fromY, int toX, int toY);
+        void movePiece(std::string&, std::string&);
 };
 
 

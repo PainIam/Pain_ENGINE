@@ -51,11 +51,17 @@ void Board::print() {
 move fn, no legal move checks, 
 */
 
-void Board::movePiece(int fromX, int fromY, int toX, int toY) {
+void Board::movePiece(std::string&from, std::string&to) {
 
-    int temp = board[fromX][fromY];
-    board[fromX][fromY] = EMPTY;
-    board[toX][toY] = temp;
+    int fromCol = from[0] - 'a';
+    int fromRow = 8 - (from[1] - '0');
+
+    int toCol = to[0] - 'a';
+    int toRow = 8 - (to[1] - '0');
+
+    int temp = board[fromRow][fromCol];
+    board[fromRow][fromCol] = EMPTY;
+    board[toRow][toCol] = temp;
     print();
 
 }
