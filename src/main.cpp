@@ -14,6 +14,9 @@ int main() {
     B.print();
 
     std::string from;
+    std::string to;
+
+    while(true) {
     std::cout << "from : ";
     std::cin >> from;
     while(valid_input(from)) {
@@ -21,7 +24,7 @@ int main() {
         std::cout << "from : ";
         std::cin >> from;
     }
-    std::string to;
+
     std::cout << "to : ";
     std::cin >> to;
 
@@ -30,7 +33,8 @@ int main() {
         std::cout << "to : " << std::endl;
         std::cin >> to;
     }
-    
+    system("clear");
     B.movePiece(from, to);
+    }
 
 }

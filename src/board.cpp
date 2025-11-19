@@ -47,11 +47,46 @@ void Board::print() {
     std::cout << "      a   b   c   d   e   f   g   h" << std::endl;
 }
 
+bool Board::canPawnMove(int fromCol, int fromRow, int toCol, int toRow) {
+
 /*
-move fn, no legal move checks, 
+simple pawn movement check
+    : checks if the forward squares are empty, no diagnal captures
+    : calculates 2 move and 1 move distance
+
 */
 
+    int d = fromRow - toRow;
+    
+    if (board[fromRow][fromCol] == 1) {
+        
+        if ((fromRow == 6 && fromCol == toCol) && (d > 0 && d < 3) && (board[fromRow - 1][toCol] == EMPTY && board[toRow][toCol]) == EMPTY)
+            return true;
+        else if ((fromRow < 6 && fromCol == toCol) && (d > 0 && d < 2) && (fromRow != 0) && board[fromRow-1][toCol] == EMPTY)
+            return true;
+        else
+            return false;
+
+    } else if (board[fromRow][fromCol] == 7) {
+        if ((fromRow == 1 && fromCol == toCol) && (d > -3 && d < 0) && (board[fromRow + 1][toCol] == EMPTY && board[toRow][toCol]) == EMPTY) {
+            return true;
+        } else if ((fromRow > 2 && fromCol == toCol) && (d > -2 && d < 0) && (fromRow != 7) && board[fromRow + 1][toCol] == EMPTY) {
+            return true;
+        } else
+            return false;
+    } else 
+        return false;
+
+}
+
+
 void Board::movePiece(std::string&from, std::string&to) {
+
+    /*
+    takes a 2 strings of valid coordinates the converts them to 
+    integers and map then into the board as valid indices
+    
+    */
 
     int fromCol = from[0] - 'a';
     int fromRow = 8 - (from[1] - '0');
@@ -59,9 +94,12 @@ void Board::movePiece(std::string&from, std::string&to) {
     int toCol = to[0] - 'a';
     int toRow = 8 - (to[1] - '0');
 
+
     int temp = board[fromRow][fromCol];
+    if(canPawnMove(fromCol, fromRow, toCol, toRow)) {
     board[fromRow][fromCol] = EMPTY;
     board[toRow][toCol] = temp;
+    }
     print();
 
 }

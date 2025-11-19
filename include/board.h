@@ -16,6 +16,7 @@ class Board {
         Board();
         void print();
         void movePiece(std::string&, std::string&);
+        bool canPawnMove(int fromCol, int fromRow, int toCol, int toRow);
 };
 
 
