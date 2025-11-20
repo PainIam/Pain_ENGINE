@@ -53,7 +53,7 @@ bool Board::canPawnMove(int fromCol, int fromRow, int toCol, int toRow) {
 simple pawn movement check
     : checks if the forward squares are empty, no diagnal captures
     : calculates 2 move and 1 move distance
-
+    : super overcomplicated for no reason
 */
 
     int d = fromRow - toRow;
@@ -79,6 +79,65 @@ simple pawn movement check
 
 }
 
+bool Board::canKnightMove(int fromCol, int fromRow, int toCol, int toRow) {
+    int d1 = abs(fromRow - toRow);
+    int d2 = abs(fromCol - toCol);
+
+    if ((d1 == 2) && (d2 == 1))
+        return true;
+    else if ((d2 == 2) && (d1 == 1))
+        return true;
+    else
+        return false;
+    return false;
+}
+
+bool Board::canBishopMove(int fromCol, int fromRow, int toCol, int toRow) {
+
+    int d1 = abs(fromCol - toCol);
+    int d2 = abs(fromRow - toRow);
+
+    if (d1 == d2)
+        return true;
+
+    return false;
+}
+
+bool Board::canRookMove(int fromCol, int fromRow, int toCol, int toRow) {
+
+    if ((fromCol == toCol) || (fromRow == toRow))
+        return true;
+    return false;
+}
+
+bool Board::canQueenMove(int fromCol, int fromRow, int toCol, int toRow) {
+    /*basically a combo of rook and bishop*/
+
+    int d1 = abs(fromCol - toCol);
+    int d2 = abs(fromRow - toRow);
+
+    if ((d1 == d2) || ((fromCol == toCol) || (fromRow == toRow)))
+        return true;
+
+    return false;
+}
+
+bool Board::canPieceMove(int piece, int fromCol, int fromRow, int toCol, int toRow) {
+    if (piece == 1 || piece == 7)
+        return canPawnMove(fromCol, fromRow, toCol, toRow);
+    else if (piece == 2 || piece == 8)
+        return canKnightMove(fromCol, fromRow, toCol, toRow);
+    else if (piece == 3 || piece == 9)
+        return canBishopMove(fromCol, fromRow, toCol, toRow);
+    else if (piece == 4 || piece == 10)
+        return canRookMove(fromCol, fromRow, toCol, toRow);
+    else if (piece == 5 || piece == 11)
+        return canQueenMove(fromCol, fromRow, toCol, toRow);
+    
+    return false;
+            
+
+}
 
 void Board::movePiece(std::string&from, std::string&to) {
 
@@ -96,7 +155,7 @@ void Board::movePiece(std::string&from, std::string&to) {
 
 
     int temp = board[fromRow][fromCol];
-    if(canPawnMove(fromCol, fromRow, toCol, toRow)) {
+    if(canPieceMove(temp, fromCol, fromRow, toCol, toRow)) {
     board[fromRow][fromCol] = EMPTY;
     board[toRow][toCol] = temp;
     }
